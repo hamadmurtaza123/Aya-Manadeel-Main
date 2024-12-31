@@ -12,12 +12,13 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
-import projectsTableData from "layouts/tables/data/projectsTableData";
+import projectsTableData from "./data/projectsTableData";
+import Button from "@mui/material/Button";
+import { useState } from "react";
 
-function Tables() {
-  const { columns, rows } = authorsTableData();
+function Inventory() {
   const { columns: pColumns, rows: pRows } = projectsTableData();
+  const [isOpen, setOpen] = useState(false);
 
   return (
     <DashboardLayout>
@@ -36,36 +37,18 @@ function Tables() {
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
-                  Authors Table
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
-          </Grid>
-          <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Projects Table
-                </MDTypography>
+                <Grid container>
+                  <Grid item lg={11}>
+                    <MDTypography variant="h6" color="white">
+                      Inventory Information
+                    </MDTypography>
+                  </Grid>
+                  <Grid item lg={1} onClick={() => setOpen(true)} sx={{ cursor: "pointer" }}>
+                    <MDTypography variant="h6" color="white">
+                      Add Inventory +
+                    </MDTypography>
+                  </Grid>
+                </Grid>
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
@@ -80,9 +63,8 @@ function Tables() {
           </Grid>
         </Grid>
       </MDBox>
-      <Footer />
     </DashboardLayout>
   );
 }
 
-export default Tables;
+export default Inventory;

@@ -12,12 +12,13 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
-import projectsTableData from "layouts/tables/data/projectsTableData";
-
-function Tables() {
+import authorsTableData from "./data/authorsTableData";
+import Button from "@mui/material/Button";
+import Icon from "@mui/material/Icon";
+import { useState } from "react";
+function Staff() {
   const { columns, rows } = authorsTableData();
-  const { columns: pColumns, rows: pRows } = projectsTableData();
+  const [isOpen, setOpen] = useState(false);
 
   return (
     <DashboardLayout>
@@ -36,9 +37,18 @@ function Tables() {
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
-                  Authors Table
-                </MDTypography>
+                <Grid container>
+                  <Grid item lg={11}>
+                    <MDTypography variant="h6" color="white">
+                      Staff
+                    </MDTypography>
+                  </Grid>
+                  <Grid item lg={1} onClick={() => setOpen(true)} sx={{ cursor: "pointer" }}>
+                    <MDTypography variant="h6" color="white">
+                      Add Staff +
+                    </MDTypography>
+                  </Grid>
+                </Grid>
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
@@ -51,38 +61,10 @@ function Tables() {
               </MDBox>
             </Card>
           </Grid>
-          <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Projects Table
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns: pColumns, rows: pRows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
-          </Grid>
         </Grid>
       </MDBox>
-      <Footer />
     </DashboardLayout>
   );
 }
 
-export default Tables;
+export default Staff;

@@ -16,7 +16,7 @@ import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 
 // Dashboard components
-import Projects from "layouts/dashboard/components/Projects";
+import Projects from "./components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 const Dashboard = () => {
   const { sales, tasks } = reportsLineChartData;
@@ -31,8 +31,8 @@ const Dashboard = () => {
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Bookings"
-                count={281}
+                title="Active Shipments"
+                count={2}
                 percentage={{
                   color: "success",
                   amount: "+55%",
@@ -45,8 +45,8 @@ const Dashboard = () => {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
+                title="Remaining Amount"
+                count="4,500"
                 percentage={{
                   color: "success",
                   amount: "+3%",
@@ -75,8 +75,8 @@ const Dashboard = () => {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Followers"
-                count="+91"
+                title="Staff"
+                count="4"
                 percentage={{
                   color: "success",
                   amount: "",

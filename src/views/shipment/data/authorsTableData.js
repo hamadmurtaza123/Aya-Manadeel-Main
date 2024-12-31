@@ -35,7 +35,6 @@ export default function data() {
         <MDTypography display="block" variant="button" fontWeight="medium">
           {name}
         </MDTypography>
-        <MDTypography variant="caption">{email}</MDTypography>
       </MDBox>
     </MDBox>
   );
@@ -45,7 +44,6 @@ export default function data() {
       <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
         {title}
       </MDTypography>
-      <MDTypography variant="caption">{description}</MDTypography>
     </MDBox>
   );
   const Action = () => (
@@ -75,7 +73,7 @@ export default function data() {
 
     rows: [
       {
-        author: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
+        author: <Author image={team2} name="Hamad Murtaza" email="john@creative-tim.com" />,
         function: <Job title="Manager" description="Organization" />,
         status: (
           <MDBox ml={-1}>
@@ -100,7 +98,7 @@ export default function data() {
         action: <Action />,
       },
       {
-        author: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
+        author: <Author image={team2} name="Ali Hamza" email="alexa@creative-tim.com" />,
         function: <Job title="Programator" description="Developer" />,
         quantity: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
@@ -125,7 +123,7 @@ export default function data() {
         action: <Action />,
       },
       {
-        author: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" />,
+        author: <Author image={team4} name="Ibrahim Khalid" email="laurent@creative-tim.com" />,
         function: <Job title="Executive" description="Projects" />,
         quantity: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
@@ -150,7 +148,7 @@ export default function data() {
         action: <Action />,
       },
       {
-        author: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" />,
+        author: <Author image={team2} name="Abu Saud" email="michael@creative-tim.com" />,
         function: <Job title="Programator" description="Developer" />,
         quantity: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">

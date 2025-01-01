@@ -13,13 +13,26 @@ import DataTable from "examples/Tables/DataTable";
 
 // Data
 import projectsTableData from "./data/projectsTableData";
-import Button from "@mui/material/Button";
 import { useState } from "react";
 
+import { Modal, Box, Button, Typography, LinearProgress, TextField } from "@mui/material";
+import * as React from "react";
+import { Formik, Form, Field } from "formik";
 function Inventory() {
   const { columns: pColumns, rows: pRows } = projectsTableData();
   const [isOpen, setOpen] = useState(false);
-
+  const [Name, setName] = React.useState("");
+  const [quantity, setQuantity] = React.useState();
+  const [price, setPrice] = React.useState();
+  const handleChange = (event) => {
+    setName(event.target.value);
+  };
+  const handlePriceChange = (event) => {
+    setPrice(event.target.value);
+  };
+  const handleQuantityChange = (event) => {
+    setQuantity(event.target.value);
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -63,6 +76,156 @@ function Inventory() {
           </Grid>
         </Grid>
       </MDBox>
+      <Modal
+        open={isOpen}
+        onClose={() => {
+          setOpen(false);
+        }}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        {/* Content inside the modal */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 1000,
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+            borderRadius: 2,
+          }}
+        >
+          <Typography id="modal-title" variant="h6" component="h2" sx={{ marginBottom: 3 }}>
+            Add New Inventory
+          </Typography>
+          <Formik
+            initialValues={{
+              Name: "",
+              quantity: null,
+              price: null,
+            }}
+            validate={(values) => {
+              const errors = {};
+
+              // Validate staff selection
+              if (!values.Name) {
+                errors.staffName = "Please select a staff member";
+              }
+
+              // Validate vehicle selection
+              if (!values.quantity) {
+                errors.vehicle = "Please select a vehicle";
+              }
+
+              // Validate date selection
+              if (!values.price) {
+                errors.selectedDate = "Date is required";
+              }
+
+              // Validate items array
+              else {
+                errors.items = values.items
+                  .map((item, index) => {
+                    const itemErrors = {};
+                    if (!item.itemName) {
+                      itemErrors.itemName = "Item name is required";
+                    }
+                    if (!item.quantity || item.quantity <= 0) {
+                      itemErrors.quantity = "Quantity must be greater than zero";
+                    }
+                    return Object.keys(itemErrors).length > 0 ? itemErrors : null;
+                  })
+                  .filter(Boolean); // Remove null entries
+              }
+
+              return errors;
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                setSubmitting(false);
+                alert(JSON.stringify(values, null, 2));
+              }, 500);
+            }}
+          >
+            {({ submitForm, isSubmitting }) => (
+              <Form>
+                <Grid container sx={{ gap: 3 }}>
+                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
+                    <Grid item lg={12}>
+                      <TextField
+                        value={Name}
+                        placeholder="Enter Item Name"
+                        variant="outlined"
+                        fullWidth
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
+                    <Grid item lg={5.5}>
+                      <TextField
+                        type="number"
+                        placeholder="Enter Quantity"
+                        value={quantity}
+                        variant="outlined"
+                        fullWidth
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          if (/^\d*$/.test(value)) {
+                            // Allow only numbers
+                            handleQuantityChange();
+                          }
+                        }}
+                        InputProps={{
+                          inputProps: { min: 0 }, // Optional: Prevent negative numbers
+                        }}
+                      />
+                    </Grid>
+                    <Grid item lg={5.5}>
+                      <TextField
+                        type="number"
+                        placeholder="Enter Unit Price"
+                        value={price}
+                        variant="outlined"
+                        fullWidth
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          if (/^\d*$/.test(value)) {
+                            // Allow only numbers
+                            handlePriceChange();
+                          }
+                        }}
+                        InputProps={{
+                          inputProps: { min: 0 }, // Optional: Prevent negative numbers
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                {isSubmitting && <LinearProgress />}
+                <br />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                  onClick={() => {
+                    setOpen(false);
+                    submitForm();
+                  }}
+                >
+                  <MDTypography variant="h6" color="white">
+                    Submit{" "}
+                  </MDTypography>
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        </Box>
+      </Modal>
     </DashboardLayout>
   );
 }

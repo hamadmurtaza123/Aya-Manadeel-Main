@@ -112,7 +112,7 @@ function Notifications() {
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar navtitle={"إشعارات"} />
       <MDBox mt={6} mb={3}>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={8}>

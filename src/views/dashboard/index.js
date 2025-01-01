@@ -23,7 +23,7 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar navtitle={"لوحة القيادة"} />
       <MDBox py={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3}>
@@ -31,12 +31,12 @@ const Dashboard = () => {
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Active Shipments"
+                title="الشحنات النشطة"
                 count={2}
                 percentage={{
                   color: "success",
                   amount: "+55%",
-                  label: "than lask week",
+                  label: "من الاسبوع الماضي",
                 }}
               />
             </MDBox>
@@ -45,12 +45,12 @@ const Dashboard = () => {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Remaining Amount"
+                title="المبلغ المتبقي"
                 count="4,500"
                 percentage={{
                   color: "success",
                   amount: "+3%",
-                  label: "than last month",
+                  label: "من الشهر الماضي",
                 }}
               />
             </MDBox>
@@ -60,12 +60,12 @@ const Dashboard = () => {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Revenue"
+                title="ربح"
                 count="34k"
                 percentage={{
                   color: "success",
                   amount: "+1%",
-                  label: "than yesterday",
+                  label: "من أمس",
                 }}
               />
             </MDBox>
@@ -80,7 +80,7 @@ const Dashboard = () => {
                 percentage={{
                   color: "success",
                   amount: "",
-                  label: "Just updated",
+                  label: "تم التحديث للتو",
                 }}
               />
             </MDBox>

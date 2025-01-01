@@ -16,7 +16,7 @@ import Shipment from "views/shipment";
 const routes = [
   {
     type: "collapse",
-    name: "Dashboard",
+    name: "لوحة القيادة",
     key: "dashboard",
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
@@ -24,7 +24,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Inventory",
+    name: "جرد",
     key: "inventory",
     icon: <Icon fontSize="small">inventory</Icon>,
     route: "/inventory",
@@ -32,7 +32,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Staff",
+    name: "طاقم عمل",
     key: "staff",
     icon: <Icon fontSize="small">people</Icon>,
     route: "/staff",
@@ -40,7 +40,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Shipment",
+    name: "شحنة",
     key: "shipment",
     icon: <Icon fontSize="small">local_shipping</Icon>,
     route: "/shipment",
@@ -80,7 +80,7 @@ const routes = [
   // },
   {
     type: "collapse",
-    name: "Profile",
+    name: "حساب تعريفي",
     key: "profile",
     icon: <Icon fontSize="small">person</Icon>,
     route: "/profile",
@@ -88,7 +88,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Sign In",
+    name: "تسجيل الدخول",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
@@ -96,7 +96,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Sign Up",
+    name: "اشتراك",
     key: "sign-up",
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",

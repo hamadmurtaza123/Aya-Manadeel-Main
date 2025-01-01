@@ -35,7 +35,7 @@ function Inventory() {
   };
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar navtitle={"جرد"} />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>

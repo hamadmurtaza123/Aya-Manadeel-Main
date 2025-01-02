@@ -53,8 +53,8 @@ function Shipment() {
     setName(event.target.value);
   };
   const price = [
-    { itemName: "Small Aya Mandeel", price: 15 },
-    { itemName: "Large Aya Mandeel", price: 25 },
+    { itemName: "آية منديل صغيرة", price: 15 },
+    { itemName: "آية منديل كبيرة", price: 25 },
   ];
   const handleVehicleChange = (event) => {
     setVehicle(event.target.value);
@@ -87,12 +87,12 @@ function Shipment() {
                 <Grid container>
                   <Grid item lg={11}>
                     <MDTypography variant="h6" color="white">
-                      Shipment Details
+                      تفاصيل الشحنة
                     </MDTypography>
                   </Grid>
                   <Grid item lg={1} onClick={() => setOpen(true)} sx={{ cursor: "pointer" }}>
                     <MDTypography variant="h6" color="white">
-                      Add Shipment +
+                      إضافة شحنة +
                     </MDTypography>
                   </Grid>
                 </Grid>
@@ -137,7 +137,7 @@ function Shipment() {
           }}
         >
           <Typography id="modal-title" variant="h6" component="h2" sx={{ marginBottom: 3 }}>
-            Add New Shipment Details
+            إضافة تفاصيل الشحنة الجديدة
           </Typography>
           <Formik
             initialValues={{
@@ -213,10 +213,11 @@ function Shipment() {
                           displayEmpty
                           fullWidth
                         >
-                          <MenuItem value="">Select Staff</MenuItem>
-                          <MenuItem value={1}>Hamad Murtaza</MenuItem>
-                          <MenuItem value={2}>Ali Hamza</MenuItem>
-                          <MenuItem value={3}>Safdar Ali</MenuItem>
+                          <MenuItem value="">اختر الموظفين</MenuItem>
+                          <MenuItem value={1}>حماد مرتضى</MenuItem>
+                          <MenuItem value={2}>علي حمزة</MenuItem>
+                          <MenuItem value={3}>صفدر علي</MenuItem>
+                          <MenuItem value={3}>ابو السعود</MenuItem>
                         </Select>
                       </FormControl>
                     </Grid>
@@ -238,7 +239,7 @@ function Shipment() {
                           displayEmpty
                           fullWidth
                         >
-                          <MenuItem value="">Select Vehicle</MenuItem>
+                          <MenuItem value="">اختر السيارة</MenuItem>
                           <MenuItem value={1}>LEX 7820</MenuItem>
                           <MenuItem value={2}>XEZ 8020</MenuItem>
                           <MenuItem value={3}>ENJ 5050</MenuItem>
@@ -291,7 +292,7 @@ function Shipment() {
                         }}
                       >
                         <MDTypography variant="h6" color="white">
-                          Add Item +
+                          إضافة عنصر +
                         </MDTypography>
                       </Button>
                     </Grid>
@@ -302,16 +303,16 @@ function Shipment() {
                         <Table>
                           <TableRow>
                             <TableCell align="left" sx={{ width: "27%" }}>
-                              Item Name
+                              اسم العنصر
                             </TableCell>
                             <TableCell align="left" sx={{ width: "28%" }}>
-                              Quantity
+                              كمية
                             </TableCell>
                             <TableCell align="left" sx={{ width: "23%" }}>
-                              Unit Price
+                              سعر الوحدة
                             </TableCell>
                             <TableCell align="left" sx={{ width: "22%" }}>
-                              Total Price
+                              السعر الاجمالي
                             </TableCell>
                           </TableRow>
                           {Item?.map((a, index) => (
@@ -336,9 +337,9 @@ function Shipment() {
                                     displayEmpty
                                     fullWidth
                                   >
-                                    <MenuItem value="">Select Item</MenuItem>
-                                    <MenuItem value="Large Aya Mandeel">Large Aya Mandeel</MenuItem>
-                                    <MenuItem value="Small Aya Mandeel">Small Aya Mandeel</MenuItem>
+                                    <MenuItem value="">حدد العنصر</MenuItem>
+                                    <MenuItem value="Large Aya Mandeel">آية منديل كبيرة</MenuItem>
+                                    <MenuItem value="Small Aya Mandeel">آية منديل صغيرة</MenuItem>
                                   </Select>
                                 </FormControl>
                               </TableCell>
@@ -415,7 +416,7 @@ function Shipment() {
                   }}
                 >
                   <MDTypography variant="h6" color="white">
-                    Submit{" "}
+                    يُقدِّم{" "}
                   </MDTypography>
                 </Button>
               </Form>

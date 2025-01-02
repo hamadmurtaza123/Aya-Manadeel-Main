@@ -68,18 +68,18 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "Item", accessor: "project", width: "20%", align: "left" },
+      { Header: "غرض", accessor: "project", width: "20%", align: "left" },
       // { Header: "budget", accessor: "budget", align: "left" },
-      { Header: "Total Quantity", accessor: "tquantity", align: "center" },
-      { Header: "Remaining Quantity", accessor: "rquantity", align: "center" },
-      { Header: "status", accessor: "status", align: "center" },
-      { Header: "completion", accessor: "completion", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
+      { Header: "الكمية الاجمالية", accessor: "tquantity", align: "center" },
+      { Header: "الكمية المتبقية", accessor: "rquantity", align: "center" },
+      { Header: "حالة", accessor: "status", align: "center" },
+      { Header: "انتهاء", accessor: "completion", align: "center" },
+      { Header: "فعل", accessor: "action", align: "center" },
     ],
 
     rows: [
       {
-        project: <Project image={LogoAsana} name="Small Aya Tissues" />,
+        project: <Project image={LogoAsana} name="آية مناديل صغيرة" />,
         // budget: (
         //   <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
         //     $2,500
@@ -87,7 +87,7 @@ export default function data() {
         // ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
+            عمل
           </MDTypography>
         ),
         tquantity: (
@@ -104,7 +104,7 @@ export default function data() {
         action: <Action />,
       },
       {
-        project: <Project image={logoGithub} name="Large Aya Tissues" />,
+        project: <Project image={LogoAsana} name="مناديل آية كبيرة" />,
         // budget: (
         //   <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
         //     $5,000
@@ -112,7 +112,7 @@ export default function data() {
         // ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
+            منتهي
           </MDTypography>
         ),
         tquantity: (

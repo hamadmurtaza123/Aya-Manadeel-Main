@@ -39,7 +39,7 @@ function Staff() {
   };
   return (
     <DashboardLayout>
-      <DashboardNavbar navtitle={"شحنة"} />
+      <DashboardNavbar navtitle={"طاقم عمل"} />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
@@ -57,12 +57,12 @@ function Staff() {
                 <Grid container>
                   <Grid item lg={11}>
                     <MDTypography variant="h6" color="white">
-                      Staff
+                      طاقم عمل
                     </MDTypography>
                   </Grid>
                   <Grid item lg={1} onClick={() => setOpen(true)} sx={{ cursor: "pointer" }}>
                     <MDTypography variant="h6" color="white">
-                      Add Staff +
+                      إضافة الموظفين +
                     </MDTypography>
                   </Grid>
                 </Grid>
@@ -103,7 +103,7 @@ function Staff() {
           }}
         >
           <Typography id="modal-title" variant="h6" component="h2" sx={{ marginBottom: 3 }}>
-            Add New Staff
+            إضافة موظفين جدد
           </Typography>
           <Formik
             initialValues={{
@@ -164,7 +164,7 @@ function Staff() {
                     <Grid item lg={5.5}>
                       <TextField
                         value={Name}
-                        placeholder="Enter Staff Name"
+                        placeholder="أدخل اسم الموظف"
                         variant="outlined"
                         fullWidth
                         onChange={handleChange}
@@ -173,7 +173,7 @@ function Staff() {
                     <Grid item lg={5.5}>
                       <TextField
                         value={Designation}
-                        placeholder="Enter Staff Designation"
+                        placeholder="أدخل تسمية الموظف"
                         variant="outlined"
                         fullWidth
                         onChange={handleDesignationChange}
@@ -184,7 +184,7 @@ function Staff() {
                     <Grid item lg={5.5}>
                       <TextField
                         value={iqamaId}
-                        placeholder="Enter Iqama Number"
+                        placeholder="أدخل رقم الإقامة"
                         variant="outlined"
                         fullWidth
                         onChange={handleIqamaChange}
@@ -193,10 +193,21 @@ function Staff() {
                     <Grid item lg={5.5}>
                       <TextField
                         value={country}
-                        placeholder="Enter Country"
+                        placeholder="أدخل البلد"
                         variant="outlined"
                         fullWidth
                         onChange={handleCountryChange}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
+                    <Grid item lg={5.5}>
+                      <TextField
+                        value={iqamaId}
+                        placeholder="أدخل هدف الشهر"
+                        variant="outlined"
+                        fullWidth
+                        onChange={handleIqamaChange}
                       />
                     </Grid>
                   </Grid>
@@ -214,7 +225,7 @@ function Staff() {
                   }}
                 >
                   <MDTypography variant="h6" color="white">
-                    Submit{" "}
+                    يُقدِّم{" "}
                   </MDTypography>
                 </Button>
               </Form>

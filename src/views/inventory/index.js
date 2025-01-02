@@ -53,12 +53,12 @@ function Inventory() {
                 <Grid container>
                   <Grid item lg={11}>
                     <MDTypography variant="h6" color="white">
-                      Inventory Information
+                      معلومات المخزون
                     </MDTypography>
                   </Grid>
                   <Grid item lg={1} onClick={() => setOpen(true)} sx={{ cursor: "pointer" }}>
                     <MDTypography variant="h6" color="white">
-                      Add Inventory +
+                      إضافة المخزون +
                     </MDTypography>
                   </Grid>
                 </Grid>
@@ -99,7 +99,7 @@ function Inventory() {
           }}
         >
           <Typography id="modal-title" variant="h6" component="h2" sx={{ marginBottom: 3 }}>
-            Add New Inventory
+            إضافة مخزون جديد
           </Typography>
           <Formik
             initialValues={{
@@ -157,7 +157,7 @@ function Inventory() {
                     <Grid item lg={12}>
                       <TextField
                         value={Name}
-                        placeholder="Enter Item Name"
+                        placeholder="أدخل اسم العنصر"
                         variant="outlined"
                         fullWidth
                         onChange={handleChange}
@@ -168,7 +168,7 @@ function Inventory() {
                     <Grid item lg={5.5}>
                       <TextField
                         type="number"
-                        placeholder="Enter Quantity"
+                        placeholder="أدخل الكمية"
                         value={quantity}
                         variant="outlined"
                         fullWidth
@@ -187,7 +187,7 @@ function Inventory() {
                     <Grid item lg={5.5}>
                       <TextField
                         type="number"
-                        placeholder="Enter Unit Price"
+                        placeholder="أدخل سعر الوحدة"
                         value={price}
                         variant="outlined"
                         fullWidth
@@ -218,7 +218,7 @@ function Inventory() {
                   }}
                 >
                   <MDTypography variant="h6" color="white">
-                    Submit{" "}
+                    يُقدِّم{" "}
                   </MDTypography>
                 </Button>
               </Form>

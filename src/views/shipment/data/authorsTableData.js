@@ -62,22 +62,22 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "Staff Name", accessor: "author", width: "20%", align: "left" },
-      { Header: "Designation", accessor: "function", align: "left" },
-      { Header: "quantity", accessor: "quantity", align: "center" },
-      { Header: "Vehicle number", accessor: "vehicle", align: "center" },
-      { Header: "status", accessor: "status", align: "center" },
-      { Header: "Date", accessor: "date", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
+      { Header: "اسم الموظف", accessor: "author", width: "20%", align: "left" },
+      { Header: "تعيين", accessor: "function", align: "left" },
+      { Header: "كمية", accessor: "quantity", align: "center" },
+      { Header: "رقم السيارة", accessor: "vehicle", align: "center" },
+      { Header: "حالة", accessor: "status", align: "center" },
+      { Header: "تاريخ", accessor: "date", align: "center" },
+      { Header: "فعل", accessor: "action", align: "center" },
     ],
 
     rows: [
       {
-        author: <Author image={team2} name="Hamad Murtaza" email="john@creative-tim.com" />,
-        function: <Job title="Manager" description="Organization" />,
+        author: <Author image={team2} name="حماد مرتضى" email="john@creative-tim.com" />,
+        function: <Job title="مدير" description="Organization" />,
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+            <MDBadge badgeContent="متصل" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
         quantity: (
@@ -98,8 +98,8 @@ export default function data() {
         action: <Action />,
       },
       {
-        author: <Author image={team2} name="Ali Hamza" email="alexa@creative-tim.com" />,
-        function: <Job title="Programator" description="Developer" />,
+        author: <Author image={team2} name="علي حمزة" email="alexa@creative-tim.com" />,
+        function: <Job title="مدير" description="Developer" />,
         quantity: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             200
@@ -112,7 +112,7 @@ export default function data() {
         ),
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
+            <MDBadge badgeContent="غير متصل" color="dark" variant="gradient" size="sm" />
           </MDBox>
         ),
         date: (
@@ -123,8 +123,8 @@ export default function data() {
         action: <Action />,
       },
       {
-        author: <Author image={team4} name="Ibrahim Khalid" email="laurent@creative-tim.com" />,
-        function: <Job title="Executive" description="Projects" />,
+        author: <Author image={team4} name="إبراهيم خالد" email="laurent@creative-tim.com" />,
+        function: <Job title="تنفيذي" description="Projects" />,
         quantity: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             500
@@ -137,7 +137,7 @@ export default function data() {
         ),
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+            <MDBadge badgeContent="متصل" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
         date: (
@@ -148,8 +148,8 @@ export default function data() {
         action: <Action />,
       },
       {
-        author: <Author image={team2} name="Abu Saud" email="michael@creative-tim.com" />,
-        function: <Job title="Programator" description="Developer" />,
+        author: <Author image={team2} name="أبو السعود" email="michael@creative-tim.com" />,
+        function: <Job title="تَعَب" description="Developer" />,
         quantity: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             100
@@ -162,7 +162,7 @@ export default function data() {
         ),
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+            <MDBadge badgeContent="متصل" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
         date: (

@@ -62,19 +62,19 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "Staff Name", accessor: "author", width: "20%", align: "left" },
-      { Header: "Designation", accessor: "function", align: "left" },
-      { Header: "Sold PCS", accessor: "selling", align: "center" },
-      { Header: "remaining amount", accessor: "amount", align: "center" },
-      { Header: "status", accessor: "status", align: "center" },
-      { Header: "Target", accessor: "target", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
+      { Header: "اسم الموظف", accessor: "author", width: "20%", align: "left" },
+      { Header: "تعيين", accessor: "function", align: "left" },
+      { Header: "العناصر المباعة", accessor: "selling", align: "center" },
+      { Header: "المبلغ المتبقي", accessor: "amount", align: "center" },
+      { Header: "حالة", accessor: "status", align: "center" },
+      { Header: "هدف", accessor: "target", align: "center" },
+      { Header: "فعل", accessor: "action", align: "center" },
     ],
 
     rows: [
       {
-        author: <Author image={team2} name="Hamad Murtaza" email="john@creative-tim.com" />,
-        function: <Job title="Manager" description="Organization" />,
+        author: <Author image={team2} name="حماد مرتضى" email="john@creative-tim.com" />,
+        function: <Job title="مدير" description="Organization" />,
         selling: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             1250
@@ -87,7 +87,7 @@ export default function data() {
         ),
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+            <MDBadge badgeContent="متصل" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
         target: (
@@ -98,8 +98,8 @@ export default function data() {
         action: <Action />,
       },
       {
-        author: <Author image={team4} name="Ali Hamza" email="alexa@creative-tim.com" />,
-        function: <Job title="Programator" description="Developer" />,
+        author: <Author image={team4} name="علي حمزة" email="alexa@creative-tim.com" />,
+        function: <Job title="مدير" description="Developer" />,
         selling: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             1800
@@ -112,7 +112,7 @@ export default function data() {
         ),
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
+            <MDBadge badgeContent="غير متصل" color="dark" variant="gradient" size="sm" />
           </MDBox>
         ),
         target: (
@@ -123,8 +123,8 @@ export default function data() {
         action: <Action />,
       },
       {
-        author: <Author image={team4} name="Ibrahim khalid" email="laurent@creative-tim.com" />,
-        function: <Job title="Executive" description="Projects" />,
+        author: <Author image={team4} name="ابراهيم خالد" email="laurent@creative-tim.com" />,
+        function: <Job title="تنفيذي" description="Projects" />,
         selling: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             3200
@@ -137,7 +137,7 @@ export default function data() {
         ),
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+            <MDBadge badgeContent="متصل" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
         target: (
@@ -148,8 +148,8 @@ export default function data() {
         action: <Action />,
       },
       {
-        author: <Author image={team2} name="Abu Saud" email="michael@creative-tim.com" />,
-        function: <Job title="Programator" description="Developer" />,
+        author: <Author image={team2} name="أبو السعود" email="michael@creative-tim.com" />,
+        function: <Job title="تَعَب" description="Developer" />,
         selling: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             2500
@@ -162,7 +162,7 @@ export default function data() {
         ),
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+            <MDBadge badgeContent="متصل" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
         target: (

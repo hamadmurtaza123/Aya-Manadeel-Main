@@ -12,6 +12,7 @@ import Icon from "@mui/material/Icon";
 import Inventory from "views/inventory";
 import Staff from "views/staff";
 import Shipment from "views/shipment";
+import Accounts from "views/accounts";
 
 const routes = [
   {
@@ -45,6 +46,14 @@ const routes = [
     icon: <Icon fontSize="small">local_shipping</Icon>,
     route: "/shipment",
     component: <Shipment />,
+  },
+  {
+    type: "collapse",
+    name: "الحسابات",
+    key: "accounts",
+    icon: <Icon fontSize="small">book</Icon>,
+    route: "/accounts",
+    component: <Accounts />,
   },
   // {
   //   type: "collapse",

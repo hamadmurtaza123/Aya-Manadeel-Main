@@ -9,7 +9,7 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
-
+import Webcam from "react-webcam";
 import authorsTableData from "./data/authorsTableData";
 import {
   Modal,
@@ -41,26 +41,52 @@ import { Formik, Form, Field } from "formik";
 import Icon from "@mui/material/Icon";
 import { useState } from "react";
 
-function Shipment() {
+function Accounts() {
   const { columns, rows } = authorsTableData();
   const [isOpen, setOpen] = useState(false);
-  const [isOpenStaff, setOpenStaff] = useState(false);
-  const [Name, setName] = React.useState("");
-  const [vehicle, setVehicle] = React.useState("");
+  const [shopName, setShopName] = React.useState("");
+  const [paymentMethod, setPaymentMethod] = React.useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [Item, setItem] = useState([]);
-  const [isAdmin, setAdmin] = useState(true);
-
-  const handleChange = (event) => {
-    setName(event.target.value);
+  const [isAddSales, setAddSales] = useState(false);
+  const [contact, setContact] = useState("");
+  const [preview, setPreview] = useState(null);
+  const [Sales, setSales] = useState([
+    {
+      shopname: "",
+      paymentMethod: "Cash",
+      amount: "1000",
+    },
+    {
+      shopname: "Shop Test",
+      paymentMethod: "Credit",
+      amount: "200",
+    },
+  ]);
+  const handleFileChange = (event) => {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+      const reader = new FileReader(); // Create a FileReader to read the file
+      reader.onloadend = () => {
+        setPreview(reader.result); // Set the preview to the file's data URL
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL
+    }
+  };
+  const handleShopName = (event) => {
+    setShopName(event.target.value);
   };
   const price = [
     { itemName: "Large Aya Mandeel", price: 25 },
     { itemName: "Small Aya Mandeel", price: 15 },
   ];
-  const handleVehicleChange = (event) => {
-    setVehicle(event.target.value);
+  const handlePayment = (event) => {
+    setPaymentMethod(event.target.value);
   };
+  const handleContact = (event) => {
+    setContact(event.target.value);
+  };
+
   const handleInputChange = (index, field, value) => {
     setItem((prev) => {
       const updatedItems = [...prev];
@@ -69,10 +95,33 @@ function Shipment() {
     });
   };
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <DashboardLayout>
-      <DashboardNavbar navtitle={"شحنة"} />
-
+      <DashboardNavbar navtitle={"الحسابات"} />
+      <Grid container xs={12} gap={2}>
+        <Grid item>
+          <Button onClick={() => setAddSales(true)} variant="contained">
+            <MDTypography variant="h6" color="white">
+              Add Sales +
+            </MDTypography>
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button onClick={() => setOpen(true)} variant="contained">
+            <MDTypography variant="h6" color="white">
+              Close Sales
+            </MDTypography>
+          </Button>
+        </Grid>
+      </Grid>
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
@@ -90,12 +139,7 @@ function Shipment() {
                 <Grid container>
                   <Grid item lg={11}>
                     <MDTypography variant="h6" color="white">
-                      تفاصيل الشحنة
-                    </MDTypography>
-                  </Grid>
-                  <Grid item lg={1} onClick={() => setOpen(true)} sx={{ cursor: "pointer" }}>
-                    <MDTypography variant="h6" color="white">
-                      إضافة شحنة +
+                      مبيعات اليوم ({formatDate(selectedDate)})
                     </MDTypography>
                   </Grid>
                 </Grid>
@@ -113,15 +157,15 @@ function Shipment() {
           </Grid>
         </Grid>
       </MDBox>
-
       <Modal
-        open={isOpen}
+        open={isAddSales}
         onClose={() => {
-          setOpen(false);
+          setAddSales(false);
+          setShopName("");
           setItem([]);
-          setVehicle("");
-          setName("");
-          setSelectedDate(null);
+          setPaymentMethod("");
+          setPreview(null);
+          setContact("");
         }}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
@@ -141,7 +185,7 @@ function Shipment() {
           }}
         >
           <Typography id="modal-title" variant="h6" component="h2" sx={{ marginBottom: 3 }}>
-            إضافة تفاصيل الشحنة الجديدة
+            إضافة مبيعات جديدة{" "}
           </Typography>
           <Formik
             initialValues={{
@@ -199,82 +243,6 @@ function Shipment() {
               <Form>
                 <Grid container sx={{ gap: 3 }}>
                   <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
-                    <Grid item lg={5.5}>
-                      <FormControl
-                        fullWidth
-                        sx={{
-                          minWidth: 200, // Adjust width
-                          ".MuiOutlinedInput-root": {
-                            height: 50, // Adjust height
-                          },
-                        }}
-                      >
-                        <Select
-                          labelId="demo-customized-select-label"
-                          id="demo-customized-select"
-                          value={Name}
-                          onChange={handleChange}
-                          displayEmpty
-                          fullWidth
-                        >
-                          <MenuItem value="">اختر الموظفين</MenuItem>
-                          <MenuItem value={1}>حماد مرتضى</MenuItem>
-                          <MenuItem value={2}>علي حمزة</MenuItem>
-                          <MenuItem value={3}>صفدر علي</MenuItem>
-                          <MenuItem value={3}>ابو السعود</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Grid>
-                    <Grid item lg={5.5}>
-                      <FormControl
-                        fullWidth
-                        sx={{
-                          minWidth: 200, // Adjust width
-                          ".MuiOutlinedInput-root": {
-                            height: 50, // Adjust height
-                          },
-                        }}
-                      >
-                        <Select
-                          labelId="demo-customized-select-label"
-                          id="demo-customized-select"
-                          value={vehicle}
-                          onChange={handleVehicleChange}
-                          displayEmpty
-                          fullWidth
-                        >
-                          <MenuItem value="">اختر السيارة</MenuItem>
-                          <MenuItem value={1}>LEX 7820</MenuItem>
-                          <MenuItem value={2}>XEZ 8020</MenuItem>
-                          <MenuItem value={3}>ENJ 5050</MenuItem>
-                          <MenuItem value={3}>ENJ 5050</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Grid>
-                  </Grid>
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
-                    <Grid item lg={5.5}>
-                      <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker
-                          value={selectedDate}
-                          onChange={(newValue) => setSelectedDate(newValue)}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              fullWidth
-                              sx={{
-                                ".MuiOutlinedInput-root": {
-                                  height: 50, // Adjust height
-                                },
-                                ".MuiInputLabel-root": {
-                                  // color: "blue", // Adjust label color
-                                },
-                              }}
-                            />
-                          )}
-                        />
-                      </LocalizationProvider>
-                    </Grid>
                     <Grid
                       item
                       lg={5.5}
@@ -296,7 +264,7 @@ function Shipment() {
                         }}
                       >
                         <MDTypography variant="h6" color="white">
-                          إضافة عنصر +
+                          إضافة تفاصيل العنصر +
                         </MDTypography>
                       </Button>
                     </Grid>
@@ -351,6 +319,7 @@ function Shipment() {
                                 <TextField
                                   type="number"
                                   value={a.quantity || ""}
+                                  placeholder="إضافة كمية"
                                   variant="outlined"
                                   fullWidth
                                   onChange={(e) => {
@@ -402,6 +371,177 @@ function Shipment() {
                       </TableContainer>
                     </Grid>
                   )}
+                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
+                    <Grid item lg={5.5}>
+                      <FormControl
+                        fullWidth
+                        sx={{
+                          minWidth: 200, // Adjust width
+                          ".MuiOutlinedInput-root": {
+                            height: 50, // Adjust height
+                          },
+                        }}
+                      >
+                        <Select
+                          labelId="demo-customized-select-label"
+                          id="demo-customized-select"
+                          value={paymentMethod}
+                          onChange={handlePayment}
+                          displayEmpty
+                          fullWidth
+                        >
+                          <MenuItem value="">حدد طريقة الدفع</MenuItem>
+                          <MenuItem value={1}>الدفع نقدا</MenuItem>
+                          <MenuItem value={2}>ائتمان</MenuItem>
+                          <MenuItem value={3}>الدفع عن طريق البنك/البطاقة</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid item lg={5.5}>
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                          value={selectedDate}
+                          onChange={(newValue) => setSelectedDate(newValue)}
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              fullWidth
+                              sx={{
+                                ".MuiOutlinedInput-root": {
+                                  height: 50, // Adjust height
+                                },
+                                ".MuiInputLabel-root": {
+                                  // color: "blue", // Adjust label color
+                                },
+                              }}
+                            />
+                          )}
+                        />
+                      </LocalizationProvider>
+                    </Grid>
+                  </Grid>
+                  {paymentMethod == 2 && (
+                    <>
+                      <Grid
+                        container
+                        lg={12}
+                        sx={{ display: "flex", gap: 9, justifyItems: "center" }}
+                      >
+                        <Grid item lg={5.5}>
+                          <TextField
+                            value={shopName}
+                            placeholder="أدخل اسم المتجر"
+                            variant="outlined"
+                            fullWidth
+                            onChange={handleShopName}
+                          />
+                        </Grid>
+                        <Grid item lg={5.5}>
+                          <TextField
+                            value={contact}
+                            placeholder="أدخل رقم الهاتف المحمول للعميل"
+                            variant="outlined"
+                            fullWidth
+                            onChange={handleContact}
+                          />
+                        </Grid>
+                      </Grid>
+                      <Grid
+                        container
+                        lg={12}
+                        sx={{ display: "flex", gap: 9, justifyItems: "center" }}
+                      >
+                        <Grid item lg={5.5}>
+                          <input
+                            accept="image/*"
+                            id="capture-image"
+                            type="file"
+                            style={{ display: "none" }}
+                            onChange={handleFileChange}
+                          />
+                          <label htmlFor="capture-image">
+                            <Button variant="contained" color="primary" component="span">
+                              <MDTypography variant="h6" color="white">
+                                أضف صورة للمتجر +{" "}
+                              </MDTypography>{" "}
+                            </Button>
+                          </label>
+                        </Grid>
+                        {preview && (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              width: "200px",
+                              height: "200px",
+                              borderRadius: "8px",
+                              overflow: "hidden",
+                              background: "#f0f0f0", // Optional: Add a background color
+                            }}
+                          >
+                            <img
+                              src={preview}
+                              alt="Preview"
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                              }}
+                            />
+                          </div>
+                        )}
+                      </Grid>
+                    </>
+                  )}
+                  {paymentMethod == 3 && (
+                    <Grid
+                      container
+                      lg={12}
+                      sx={{ display: "flex", gap: 9, justifyItems: "center" }}
+                    >
+                      <Grid item lg={5.5}>
+                        <input
+                          accept="image/*"
+                          id="capture-image"
+                          type="file"
+                          style={{ display: "none" }}
+                          onChange={handleFileChange}
+                        />
+                        <label htmlFor="capture-image">
+                          <Button variant="contained" color="primary" component="span">
+                            <MDTypography variant="h6" color="white">
+                              صورة الإيصال +
+                            </MDTypography>{" "}
+                          </Button>
+                        </label>
+                      </Grid>
+                      {preview && (
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "200px",
+                            height: "200px",
+                            borderRadius: "8px",
+                            overflow: "hidden",
+                            background: "#f0f0f0", // Optional: Add a background color
+                          }}
+                        >
+                          <img
+                            src={preview}
+                            alt="Preview"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                            }}
+                          />
+                        </div>
+                      )}
+                    </Grid>
+                  )}
                 </Grid>
 
                 {isSubmitting && <LinearProgress />}
@@ -411,11 +551,12 @@ function Shipment() {
                   color="primary"
                   disabled={isSubmitting}
                   onClick={() => {
-                    setOpen(false);
+                    setAddSales(false);
+                    setShopName("");
                     setItem([]);
-                    setVehicle("");
-                    setName("");
-                    setSelectedDate(null);
+                    setPaymentMethod("");
+                    setPreview(null);
+                    setContact("");
                     submitForm();
                   }}
                 >
@@ -429,13 +570,9 @@ function Shipment() {
         </Box>
       </Modal>
       <Modal
-        open={isOpenStaff}
+        open={isOpen}
         onClose={() => {
-          setOpenStaff(false);
-          setItem([]);
-          setVehicle("");
-          setName("");
-          setSelectedDate(null);
+          setOpen(false);
         }}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
@@ -455,7 +592,7 @@ function Shipment() {
           }}
         >
           <Typography id="modal-title" variant="h6" component="h2" sx={{ marginBottom: 3 }}>
-            إضافة تفاصيل الشحنة الجديدة
+            اغلاق مبيعات اليوم{" "}
           </Typography>
           <Formik
             initialValues={{
@@ -512,202 +649,56 @@ function Shipment() {
             {({ submitForm, isSubmitting }) => (
               <Form>
                 <Grid container sx={{ gap: 3 }}>
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
-                    <Grid item lg={5.5}>
-                      <FormControl
-                        fullWidth
-                        sx={{
-                          minWidth: 200, // Adjust width
-                          ".MuiOutlinedInput-root": {
-                            height: 50, // Adjust height
-                          },
-                        }}
-                      >
-                        <Select
-                          labelId="demo-customized-select-label"
-                          id="demo-customized-select"
-                          value={Name}
-                          onChange={handleChange}
-                          displayEmpty
-                          fullWidth
-                        >
-                          <MenuItem value="">اختر الموظفين</MenuItem>
-                          <MenuItem value={1}>حماد مرتضى</MenuItem>
-                          <MenuItem value={2}>علي حمزة</MenuItem>
-                          <MenuItem value={3}>صفدر علي</MenuItem>
-                          <MenuItem value={3}>ابو السعود</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Grid>
-                    <Grid item lg={5.5}>
-                      <FormControl
-                        fullWidth
-                        sx={{
-                          minWidth: 200, // Adjust width
-                          ".MuiOutlinedInput-root": {
-                            height: 50, // Adjust height
-                          },
-                        }}
-                      >
-                        <Select
-                          labelId="demo-customized-select-label"
-                          id="demo-customized-select"
-                          value={vehicle}
-                          onChange={handleVehicleChange}
-                          displayEmpty
-                          fullWidth
-                        >
-                          <MenuItem value="">اختر السيارة</MenuItem>
-                          <MenuItem value={1}>LEX 7820</MenuItem>
-                          <MenuItem value={2}>XEZ 8020</MenuItem>
-                          <MenuItem value={3}>ENJ 5050</MenuItem>
-                          <MenuItem value={3}>ENJ 5050</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Grid>
-                  </Grid>
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
-                    <Grid item lg={5.5}>
-                      <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker
-                          value={selectedDate}
-                          onChange={(newValue) => setSelectedDate(newValue)}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              fullWidth
-                              sx={{
-                                ".MuiOutlinedInput-root": {
-                                  height: 50, // Adjust height
-                                },
-                                ".MuiInputLabel-root": {
-                                  // color: "blue", // Adjust label color
-                                },
-                              }}
-                            />
-                          )}
-                        />
-                      </LocalizationProvider>
-                    </Grid>
-                    <Grid
-                      item
-                      lg={5.5}
-                      justifyContent="flex-end" // Aligns the button to the end of the Grid
-                      alignItems="flex-end"
-                    >
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {
-                          setItem((prev) => [
-                            ...prev,
-                            {
-                              id: `id-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-                              itemName: "",
-                              quantity: "",
-                            },
-                          ]);
-                        }}
-                      >
-                        <MDTypography variant="h6" color="white">
-                          إضافة عنصر +
-                        </MDTypography>
-                      </Button>
-                    </Grid>
-                  </Grid>
-                  {Item.length > 0 && (
+                  {Sales.length > 0 && (
                     <Grid container lg={12}>
                       <TableContainer>
                         <Table>
                           <TableRow>
                             <TableCell align="left" sx={{ width: "27%" }}>
-                              اسم العنصر
+                              معرف البيع
                             </TableCell>
                             <TableCell align="left" sx={{ width: "28%" }}>
-                              كمية
+                              اسم المتجر
                             </TableCell>
                             <TableCell align="left" sx={{ width: "23%" }}>
-                              سعر الوحدة
+                              طريقة الدفع{" "}
                             </TableCell>
                             <TableCell align="left" sx={{ width: "22%" }}>
                               السعر الاجمالي
                             </TableCell>
                           </TableRow>
-                          {Item?.map((a, index) => (
+                          {Sales?.map((a, index) => (
                             <TableRow key={index}>
                               <TableCell align="left" sx={{ width: "27%" }}>
-                                <FormControl
+                                <TextField
+                                  value={`sale00${index + 1}`}
+                                  variant="outlined"
                                   fullWidth
-                                  sx={{
-                                    minWidth: 200,
-                                    ".MuiOutlinedInput-root": {
-                                      height: 45,
-                                    },
-                                  }}
-                                >
-                                  <Select
-                                    labelId="demo-customized-select-label"
-                                    id={`select-${index}`}
-                                    value={a.itemName || ""}
-                                    onChange={(e) =>
-                                      handleInputChange(index, "itemName", e.target.value)
-                                    }
-                                    displayEmpty
-                                    fullWidth
-                                  >
-                                    <MenuItem value="">حدد العنصر</MenuItem>
-                                    <MenuItem value="Large Aya Mandeel">آية منديل كبيرة</MenuItem>
-                                    <MenuItem value="Small Aya Mandeel">آية منديل صغيرة</MenuItem>
-                                  </Select>
-                                </FormControl>
+                                  onChange={handleContact}
+                                />
                               </TableCell>
                               <TableCell align="left" sx={{ width: "28%" }}>
                                 <TextField
-                                  type="number"
-                                  value={a.quantity || ""}
+                                  value={a.shopname}
                                   variant="outlined"
                                   fullWidth
-                                  onChange={(e) => {
-                                    const value = e.target.value;
-                                    if (/^\d*$/.test(value)) {
-                                      // Allow only numbers
-                                      handleInputChange(
-                                        index,
-                                        "quantity",
-                                        value ? parseInt(value, 10) : ""
-                                      );
-                                    }
-                                  }}
-                                  InputProps={{
-                                    inputProps: { min: 0 }, // Optional: Prevent negative numbers
-                                  }}
+                                  onChange={handleContact}
                                 />
                               </TableCell>
                               <TableCell align="left" sx={{ width: "23%" }}>
                                 <TextField
-                                  value={
-                                    price.find((e) => e.itemName === a.itemName)?.price || "" // Find the matching price or return an empty string
-                                  }
+                                  value={a.paymentMethod}
                                   variant="outlined"
                                   fullWidth
-                                  InputProps={{
-                                    readOnly: true, // Make the field read-only
-                                  }}
+                                  onChange={handleContact}
                                 />
                               </TableCell>
                               <TableCell align="left" sx={{ width: "22%" }}>
                                 <TextField
-                                  value={
-                                    a.quantity && price.find((e) => e.itemName === a.itemName)
-                                      ? a.quantity *
-                                        price.find((e) => e.itemName === a.itemName).price
-                                      : ""
-                                  }
+                                  value={a.amount}
                                   variant="outlined"
                                   fullWidth
-                                  InputProps={{
-                                    readOnly: true, // Makes the field read-only
-                                  }}
+                                  onChange={handleContact}
                                 />
                               </TableCell>
                             </TableRow>
@@ -716,6 +707,49 @@ function Shipment() {
                       </TableContainer>
                     </Grid>
                   )}
+
+                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
+                    <Grid item lg={5.5}>
+                      <input
+                        accept="image/*"
+                        id="capture-image"
+                        type="file"
+                        style={{ display: "none" }}
+                        onChange={handleFileChange}
+                      />
+                      <label htmlFor="capture-image">
+                        <Button variant="contained" color="primary" component="span">
+                          <MDTypography variant="h6" color="white">
+                            أدخل صورة العناصر المتبقية +
+                          </MDTypography>
+                        </Button>
+                      </label>
+                    </Grid>
+                    {preview && (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          width: "200px",
+                          height: "200px",
+                          borderRadius: "8px",
+                          overflow: "hidden",
+                          background: "#f0f0f0", // Optional: Add a background color
+                        }}
+                      >
+                        <img
+                          src={preview}
+                          alt="Preview"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </div>
+                    )}
+                  </Grid>
                 </Grid>
 
                 {isSubmitting && <LinearProgress />}
@@ -725,11 +759,7 @@ function Shipment() {
                   color="primary"
                   disabled={isSubmitting}
                   onClick={() => {
-                    setOpenStaff(false);
-                    setItem([]);
-                    setVehicle("");
-                    setName("");
-                    setSelectedDate(null);
+                    setOpen(false);
                     submitForm();
                   }}
                 >
@@ -746,4 +776,4 @@ function Shipment() {
   );
 }
 
-export default Shipment;
+export default Accounts;

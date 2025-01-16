@@ -25,6 +25,8 @@ function Staff() {
   const [Designation, setDesignation] = React.useState("");
   const [iqamaId, setIqamaId] = React.useState("");
   const [country, setCountry] = React.useState("");
+  const [target, setTarget] = React.useState("");
+  const [vehicle, setVehicle] = React.useState("");
   const handleChange = (event) => {
     setName(event.target.value);
   };
@@ -37,6 +39,13 @@ function Staff() {
   const handleCountryChange = (event) => {
     setCountry(event.target.value);
   };
+  const handletargetChange = (event) => {
+    setTarget(event.target.value);
+  };
+  const handleVehicleChange = (event) => {
+    setVehicle(event.target.value);
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar navtitle={"طاقم عمل"} />
@@ -203,11 +212,20 @@ function Staff() {
                   <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
                     <Grid item lg={5.5}>
                       <TextField
-                        value={iqamaId}
+                        value={target}
                         placeholder="أدخل هدف الشهر"
                         variant="outlined"
                         fullWidth
-                        onChange={handleIqamaChange}
+                        onChange={handletargetChange}
+                      />
+                    </Grid>
+                    <Grid item lg={5.5}>
+                      <TextField
+                        value={vehicle}
+                        placeholder="أدخل معلومات السيارة"
+                        variant="outlined"
+                        fullWidth
+                        onChange={handleVehicleChange}
                       />
                     </Grid>
                   </Grid>

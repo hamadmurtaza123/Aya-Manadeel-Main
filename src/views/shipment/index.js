@@ -40,6 +40,7 @@ import * as React from "react";
 import { Formik, Form, Field } from "formik";
 import Icon from "@mui/material/Icon";
 import { useState } from "react";
+import { width } from "@mui/system";
 
 function Shipment() {
   const { columns, rows } = authorsTableData();
@@ -88,12 +89,20 @@ function Shipment() {
                 coloredShadow="info"
               >
                 <Grid container>
-                  <Grid item lg={11}>
+                  <Grid item lg={11} md={10} sm={10} xs={8}>
                     <MDTypography variant="h6" color="white">
                       تفاصيل الشحنة
                     </MDTypography>
                   </Grid>
-                  <Grid item lg={1} onClick={() => setOpen(true)} sx={{ cursor: "pointer" }}>
+                  <Grid
+                    item
+                    lg={1}
+                    md={2}
+                    sm={2}
+                    xs={4}
+                    onClick={() => setOpen(true)}
+                    sx={{ cursor: "pointer" }}
+                  >
                     <MDTypography variant="h6" color="white">
                       إضافة شحنة +
                     </MDTypography>
@@ -133,7 +142,7 @@ function Shipment() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 1000,
+            width: "80%",
             bgcolor: "background.paper",
             boxShadow: 24,
             p: 4,
@@ -198,8 +207,12 @@ function Shipment() {
             {({ submitForm, isSubmitting }) => (
               <Form>
                 <Grid container sx={{ gap: 3 }}>
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
-                    <Grid item lg={5.5}>
+                  <Grid
+                    container
+                    lg={12}
+                    sx={{ display: "flex", justifyItems: "center", gap: { xs: 2, lg: 9, md: 9 } }}
+                  >
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <FormControl
                         fullWidth
                         sx={{
@@ -225,7 +238,7 @@ function Shipment() {
                         </Select>
                       </FormControl>
                     </Grid>
-                    <Grid item lg={5.5}>
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <FormControl
                         fullWidth
                         sx={{
@@ -252,11 +265,16 @@ function Shipment() {
                       </FormControl>
                     </Grid>
                   </Grid>
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
-                    <Grid item lg={5.5}>
+                  <Grid
+                    container
+                    lg={12}
+                    sx={{ display: "flex", gap: { xs: 2, lg: 9, md: 9 }, justifyItems: "center" }}
+                  >
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                           value={selectedDate}
+                          label="حدد التاريخ"
                           onChange={(newValue) => setSelectedDate(newValue)}
                           renderInput={(params) => (
                             <TextField
@@ -277,7 +295,11 @@ function Shipment() {
                     </Grid>
                     <Grid
                       item
-                      lg={5.5}
+                      lg={5}
+                      xl={5.5}
+                      md={5}
+                      sm={5}
+                      xs={12}
                       justifyContent="flex-end" // Aligns the button to the end of the Grid
                       alignItems="flex-end"
                     >
@@ -302,37 +324,30 @@ function Shipment() {
                     </Grid>
                   </Grid>
                   {Item.length > 0 && (
-                    <Grid container lg={12}>
+                    <Grid container sx={{ width: "100%", overflowX: "auto" }}>
                       <TableContainer>
                         <Table>
                           <TableRow>
-                            <TableCell align="left" sx={{ width: "27%" }}>
-                              اسم العنصر
-                            </TableCell>
-                            <TableCell align="left" sx={{ width: "28%" }}>
-                              كمية
-                            </TableCell>
-                            <TableCell align="left" sx={{ width: "23%" }}>
-                              سعر الوحدة
-                            </TableCell>
-                            <TableCell align="left" sx={{ width: "22%" }}>
-                              السعر الاجمالي
-                            </TableCell>
+                            <TableCell align="left">اسم العنصر</TableCell>
+                            <TableCell align="left">كمية</TableCell>
+                            <TableCell align="left">سعر الوحدة</TableCell>
+                            <TableCell align="left">السعر الاجمالي</TableCell>
                           </TableRow>
                           {Item?.map((a, index) => (
                             <TableRow key={index}>
-                              <TableCell align="left" sx={{ width: "27%" }}>
+                              <TableCell
+                                align="left"
+                                sx={{
+                                  width: { lg: "25%", md: "30%", xs: "100%" }, // Take full width on small screens
+                                  minWidth: 150, // Ensures text is readable
+                                }}
+                              >
                                 <FormControl
                                   fullWidth
-                                  sx={{
-                                    minWidth: 200,
-                                    ".MuiOutlinedInput-root": {
-                                      height: 45,
-                                    },
-                                  }}
+                                  sx={{ ".MuiOutlinedInput-root": { height: 45 } }}
                                 >
                                   <Select
-                                    labelId="demo-customized-select-label"
+                                    labelId={`select-label-${index}`}
                                     id={`select-${index}`}
                                     value={a.itemName || ""}
                                     onChange={(e) =>
@@ -347,7 +362,13 @@ function Shipment() {
                                   </Select>
                                 </FormControl>
                               </TableCell>
-                              <TableCell align="left" sx={{ width: "28%" }}>
+                              <TableCell
+                                align="left"
+                                sx={{
+                                  width: { lg: "20%", md: "25%", xs: "100%" },
+                                  minWidth: 100,
+                                }}
+                              >
                                 <TextField
                                   type="number"
                                   value={a.quantity || ""}
@@ -356,7 +377,6 @@ function Shipment() {
                                   onChange={(e) => {
                                     const value = e.target.value;
                                     if (/^\d*$/.test(value)) {
-                                      // Allow only numbers
                                       handleInputChange(
                                         index,
                                         "quantity",
@@ -364,24 +384,30 @@ function Shipment() {
                                       );
                                     }
                                   }}
-                                  InputProps={{
-                                    inputProps: { min: 0 }, // Optional: Prevent negative numbers
-                                  }}
+                                  InputProps={{ inputProps: { min: 0 } }}
                                 />
                               </TableCell>
-                              <TableCell align="left" sx={{ width: "23%" }}>
+                              <TableCell
+                                align="left"
+                                sx={{
+                                  width: { lg: "25%", md: "25%", xs: "100%" },
+                                  minWidth: 120,
+                                }}
+                              >
                                 <TextField
-                                  value={
-                                    price.find((e) => e.itemName === a.itemName)?.price || "" // Find the matching price or return an empty string
-                                  }
+                                  value={price.find((e) => e.itemName === a.itemName)?.price || ""}
                                   variant="outlined"
                                   fullWidth
-                                  InputProps={{
-                                    readOnly: true, // Make the field read-only
-                                  }}
+                                  InputProps={{ readOnly: true }}
                                 />
                               </TableCell>
-                              <TableCell align="left" sx={{ width: "22%" }}>
+                              <TableCell
+                                align="left"
+                                sx={{
+                                  width: { lg: "30%", md: "20%", xs: "100%" },
+                                  minWidth: 140,
+                                }}
+                              >
                                 <TextField
                                   value={
                                     a.quantity && price.find((e) => e.itemName === a.itemName)
@@ -391,9 +417,7 @@ function Shipment() {
                                   }
                                   variant="outlined"
                                   fullWidth
-                                  InputProps={{
-                                    readOnly: true, // Makes the field read-only
-                                  }}
+                                  InputProps={{ readOnly: true }}
                                 />
                               </TableCell>
                             </TableRow>

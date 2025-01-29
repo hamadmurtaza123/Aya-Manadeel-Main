@@ -64,12 +64,20 @@ function Staff() {
                 coloredShadow="info"
               >
                 <Grid container>
-                  <Grid item lg={11}>
+                  <Grid item lg={11} md={10} sm={10} xs={8}>
                     <MDTypography variant="h6" color="white">
                       طاقم عمل
                     </MDTypography>
                   </Grid>
-                  <Grid item lg={1} onClick={() => setOpen(true)} sx={{ cursor: "pointer" }}>
+                  <Grid
+                    item
+                    lg={1}
+                    md={2}
+                    sm={2}
+                    xs={4}
+                    onClick={() => setOpen(true)}
+                    sx={{ cursor: "pointer" }}
+                  >
                     <MDTypography variant="h6" color="white">
                       إضافة الموظفين +
                     </MDTypography>
@@ -104,7 +112,7 @@ function Staff() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 1000,
+            width: "80%",
             bgcolor: "background.paper",
             boxShadow: 24,
             p: 4,
@@ -169,8 +177,12 @@ function Staff() {
             {({ submitForm, isSubmitting }) => (
               <Form>
                 <Grid container sx={{ gap: 3 }}>
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
-                    <Grid item lg={5.5}>
+                  <Grid
+                    container
+                    lg={12}
+                    sx={{ display: "flex", gap: { xs: 2, lg: 9, md: 9 }, justifyItems: "center" }}
+                  >
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <TextField
                         value={Name}
                         placeholder="أدخل اسم الموظف"
@@ -179,7 +191,7 @@ function Staff() {
                         onChange={handleChange}
                       />
                     </Grid>
-                    <Grid item lg={5.5}>
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <TextField
                         value={Designation}
                         placeholder="أدخل تسمية الموظف"
@@ -189,8 +201,12 @@ function Staff() {
                       />
                     </Grid>
                   </Grid>
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
-                    <Grid item lg={5.5}>
+                  <Grid
+                    container
+                    lg={12}
+                    sx={{ display: "flex", gap: { xs: 2, lg: 9, md: 9 }, justifyItems: "center" }}
+                  >
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <TextField
                         value={iqamaId}
                         placeholder="أدخل رقم الإقامة"
@@ -199,7 +215,7 @@ function Staff() {
                         onChange={handleIqamaChange}
                       />
                     </Grid>
-                    <Grid item lg={5.5}>
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <TextField
                         value={country}
                         placeholder="أدخل البلد"
@@ -209,8 +225,12 @@ function Staff() {
                       />
                     </Grid>
                   </Grid>
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
-                    <Grid item lg={5.5}>
+                  <Grid
+                    container
+                    lg={12}
+                    sx={{ display: "flex", gap: { xs: 2, lg: 9, md: 9 }, justifyItems: "center" }}
+                  >
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <TextField
                         value={target}
                         placeholder="أدخل هدف الشهر"
@@ -219,7 +239,7 @@ function Staff() {
                         onChange={handletargetChange}
                       />
                     </Grid>
-                    <Grid item lg={5.5}>
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <TextField
                         value={vehicle}
                         placeholder="أدخل معلومات السيارة"

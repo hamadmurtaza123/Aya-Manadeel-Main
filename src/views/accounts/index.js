@@ -177,7 +177,7 @@ function Accounts() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 1000,
+            width: "80%",
             bgcolor: "background.paper",
             boxShadow: 24,
             p: 4,
@@ -242,10 +242,18 @@ function Accounts() {
             {({ submitForm, isSubmitting }) => (
               <Form>
                 <Grid container sx={{ gap: 3 }}>
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
+                  <Grid
+                    container
+                    lg={12}
+                    sx={{ display: "flex", gap: { xs: 2, lg: 9, md: 9 }, justifyItems: "center" }}
+                  >
                     <Grid
                       item
-                      lg={5.5}
+                      lg={5}
+                      xl={5.5}
+                      md={5}
+                      sm={5}
+                      xs={12}
                       justifyContent="flex-end" // Aligns the button to the end of the Grid
                       alignItems="flex-end"
                     >
@@ -270,30 +278,27 @@ function Accounts() {
                     </Grid>
                   </Grid>
                   {Item.length > 0 && (
-                    <Grid container lg={12}>
+                    <Grid container sx={{ width: "100%", overflowX: "auto" }}>
                       <TableContainer>
                         <Table>
                           <TableRow>
-                            <TableCell align="left" sx={{ width: "27%" }}>
-                              اسم العنصر
-                            </TableCell>
-                            <TableCell align="left" sx={{ width: "28%" }}>
-                              كمية
-                            </TableCell>
-                            <TableCell align="left" sx={{ width: "23%" }}>
-                              سعر الوحدة
-                            </TableCell>
-                            <TableCell align="left" sx={{ width: "22%" }}>
-                              السعر الاجمالي
-                            </TableCell>
+                            <TableCell align="left">اسم العنصر</TableCell>
+                            <TableCell align="left">كمية</TableCell>
+                            <TableCell align="left">سعر الوحدة</TableCell>
+                            <TableCell align="left">السعر الاجمالي</TableCell>
                           </TableRow>
                           {Item?.map((a, index) => (
                             <TableRow key={index}>
-                              <TableCell align="left" sx={{ width: "27%" }}>
+                              <TableCell
+                                align="left"
+                                sx={{
+                                  width: { lg: "25%", md: "30%", xs: "100%" }, // Take full width on small screens
+                                  minWidth: 150, // Ensures text is readable
+                                }}
+                              >
                                 <FormControl
                                   fullWidth
                                   sx={{
-                                    minWidth: 200,
                                     ".MuiOutlinedInput-root": {
                                       height: 45,
                                     },
@@ -315,7 +320,13 @@ function Accounts() {
                                   </Select>
                                 </FormControl>
                               </TableCell>
-                              <TableCell align="left" sx={{ width: "28%" }}>
+                              <TableCell
+                                align="left"
+                                sx={{
+                                  width: { lg: "20%", md: "25%", xs: "100%" },
+                                  minWidth: 100,
+                                }}
+                              >
                                 <TextField
                                   type="number"
                                   value={a.quantity || ""}
@@ -338,7 +349,13 @@ function Accounts() {
                                   }}
                                 />
                               </TableCell>
-                              <TableCell align="left" sx={{ width: "23%" }}>
+                              <TableCell
+                                align="left"
+                                sx={{
+                                  width: { lg: "25%", md: "25%", xs: "100%" },
+                                  minWidth: 120,
+                                }}
+                              >
                                 <TextField
                                   value={
                                     price.find((e) => e.itemName === a.itemName)?.price || "" // Find the matching price or return an empty string
@@ -350,7 +367,13 @@ function Accounts() {
                                   }}
                                 />
                               </TableCell>
-                              <TableCell align="left" sx={{ width: "22%" }}>
+                              <TableCell
+                                align="left"
+                                sx={{
+                                  width: { lg: "30%", md: "20%", xs: "100%" },
+                                  minWidth: 140,
+                                }}
+                              >
                                 <TextField
                                   value={
                                     a.quantity && price.find((e) => e.itemName === a.itemName)
@@ -371,8 +394,12 @@ function Accounts() {
                       </TableContainer>
                     </Grid>
                   )}
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
-                    <Grid item lg={5.5}>
+                  <Grid
+                    container
+                    lg={12}
+                    sx={{ display: "flex", gap: { xs: 2, lg: 9, md: 9 }, justifyItems: "center" }}
+                  >
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <FormControl
                         fullWidth
                         sx={{
@@ -397,7 +424,7 @@ function Accounts() {
                         </Select>
                       </FormControl>
                     </Grid>
-                    <Grid item lg={5.5}>
+                    <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                       <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                           value={selectedDate}
@@ -425,9 +452,13 @@ function Accounts() {
                       <Grid
                         container
                         lg={12}
-                        sx={{ display: "flex", gap: 9, justifyItems: "center" }}
+                        sx={{
+                          display: "flex",
+                          gap: { xs: 2, lg: 9, md: 9 },
+                          justifyItems: "center",
+                        }}
                       >
-                        <Grid item lg={5.5}>
+                        <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                           <TextField
                             value={shopName}
                             placeholder="أدخل اسم المتجر"
@@ -436,7 +467,7 @@ function Accounts() {
                             onChange={handleShopName}
                           />
                         </Grid>
-                        <Grid item lg={5.5}>
+                        <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                           <TextField
                             value={contact}
                             placeholder="أدخل رقم الهاتف المحمول للعميل"
@@ -449,9 +480,13 @@ function Accounts() {
                       <Grid
                         container
                         lg={12}
-                        sx={{ display: "flex", gap: 9, justifyItems: "center" }}
+                        sx={{
+                          display: "flex",
+                          gap: { xs: 2, lg: 9, md: 9 },
+                          justifyItems: "center",
+                        }}
                       >
-                        <Grid item lg={5.5}>
+                        <Grid item lg={5} xl={5.5} md={5} sm={5} xs={12}>
                           <input
                             accept="image/*"
                             id="capture-image"
@@ -498,7 +533,7 @@ function Accounts() {
                     <Grid
                       container
                       lg={12}
-                      sx={{ display: "flex", gap: 9, justifyItems: "center" }}
+                      sx={{ display: "flex", gap: { xs: 2, lg: 9, md: 9 }, justifyItems: "center" }}
                     >
                       <Grid item lg={5.5}>
                         <input
@@ -708,7 +743,11 @@ function Accounts() {
                     </Grid>
                   )}
 
-                  <Grid container lg={12} sx={{ display: "flex", gap: 9, justifyItems: "center" }}>
+                  <Grid
+                    container
+                    lg={12}
+                    sx={{ display: "flex", gap: { xs: 2, lg: 9, md: 9 }, justifyItems: "center" }}
+                  >
                     <Grid item lg={5.5}>
                       <input
                         accept="image/*"
